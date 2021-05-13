@@ -1,0 +1,64 @@
+swagger: "2.0"
+info:
+  description: "Test Sofka aptitudes"
+  version: "1.0.0"
+  title: "Sofka Test"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "codigonota@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:9091"
+basePath: "/v1"
+tags:
+- name: "greet"
+  description: "Resource to greeting the user, according with the Mother tongue"
+- name: "security"
+  description: "resource to generate the token"
+
+schemes:
+- "https"
+- "http"
+paths:
+ 
+  /greet:
+    get:
+      tags:
+      - "greet"
+      summary: "Finds Pets by status"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "greet"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Token"
+        in: "query"
+        description: "Token values that need to be authorized"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid status value"
+      security:
+       - greet_auth: []
+  /token:
+    get:
+      tags:
+      - "security"
+      summary: "Finds the diferent tokens"
+      description: "Multiple token for this tests"
+      operationId: "token"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid status value"
+ 
+securityDefinitions:
+  greet_auth:
+    type: "basic"
+
+
